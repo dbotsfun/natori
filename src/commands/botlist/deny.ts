@@ -52,8 +52,6 @@ export default class UserCommand extends SubCommand {
 			ctx.options.reason = `${preset.reason} | ${preset.description}`
 		}
 
-		console.log(ctx.options.reason)
-
 		const req = await graphqlRequest<MutationResponseData | GraphQLError>(
 			query,
 			{ input: { id: ctx.options.id, reason: ctx.options.reason } },
@@ -63,6 +61,14 @@ export default class UserCommand extends SubCommand {
 		if (!req.data) {
 			throw new Error(req.errors[0].message)
 		}
+
+		const webhook = await ctx.client.webhooks.fetch("1218939925349797989", "eTPDMyfqT-JNW4GgwewOq1p0AbVO0iQfXuJXFKpx9hCGamqTPgZBhUTuqLE6m_T0hV7W");
+
+		webhook.messages.write({
+			body: {
+				content: `${req.data.rejectBot.name} has been denied by <@${ctx.author.id}>\n\nReason: \`${ctx.options.reason}\``
+			}
+		})
 
 		return ctx.write({
 			content: `Action: Deny ${req.data.rejectBot.name}\nReason: \`${ctx.options.reason}\``,
