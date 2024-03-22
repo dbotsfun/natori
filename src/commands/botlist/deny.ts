@@ -11,7 +11,7 @@ import graphqlRequest, { type GraphQLError } from "../../lib/gqlRequest"
 const query = `
     mutation Deny($input: RejectBotInput!) {
         rejectBot(input: $input) {
-        name
+        	name
         }
     }
 `
