@@ -62,7 +62,7 @@ export default class UserCommand extends SubCommand {
 			throw new Error(req.errors[0].message)
 		}
 
-		const webhook = await ctx.client.webhooks.fetch("1218939925349797989", "eTPDMyfqT-JNW4GgwewOq1p0AbVO0iQfXuJXFKpx9hCGamqTPgZBhUTuqLE6m_T0hV7W");
+		const webhook = await ctx.client.webhooks.fetch(process.env.WEBHOOK_ID!, process.env.WEBHOOK_TOKEN!);
 
 		webhook.messages.write({
 			body: {
