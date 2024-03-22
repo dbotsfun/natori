@@ -62,12 +62,10 @@ export default class UserCommand extends SubCommand {
 			throw new Error(req.errors[0].message)
 		}
 
-		const webhook = await ctx.client.webhooks.fetch(process.env.WEBHOOK_ID!, process.env.WEBHOOK_TOKEN!);
+		const logsChannel = await ctx.client.channels.fetch("1218939832391303229", true);
 
-		webhook.messages.write({
-			body: {
-				content: `${req.data.rejectBot.name} has been denied by <@${ctx.author.id}>\n\nReason: \`${ctx.options.reason}\``
-			}
+		if (logsChannel.isTextGuild()) logsChannel.messages.write({
+			content: `${req.data.rejectBot.name} has been denied by <@${ctx.author.id}>\n\nReason: \`${ctx.options.reason}\``
 		})
 
 		return ctx.write({

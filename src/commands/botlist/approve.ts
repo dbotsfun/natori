@@ -47,12 +47,10 @@ export default class UserCommand extends SubCommand {
             throw new Error(req.errors[0].message)
         }
 
-        const webhook = await ctx.client.webhooks.fetch(process.env.WEBHOOK_ID!, process.env.WEBHOOK_TOKEN!);
+        const logsChannel = await ctx.client.channels.fetch("1218939832391303229", true);
 
-        webhook.messages.write({
-            body: {
-                content: `${req.data.approveBot.name} has been approved by <@${ctx.author.id}>`
-            }
+        if (logsChannel.isTextGuild()) logsChannel.messages.write({
+            content: `${req.data.approveBot.name} has been approved by <@${ctx.author.id}>`
         })
 
         return ctx.write({
