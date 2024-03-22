@@ -1,1 +1,0 @@
-ultra simple seyfert start template.
