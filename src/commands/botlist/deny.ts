@@ -65,7 +65,7 @@ export default class UserCommand extends SubCommand {
 		const logsChannel = await ctx.client.channels.fetch("1218939832391303229", true);
 
 		if (logsChannel.isTextGuild()) logsChannel.messages.write({
-			content: `${req.data.rejectBot.name} has been denied by <@${ctx.author.id}>\n\nReason: \`${ctx.options.reason}\``
+			content: `**${req.data.rejectBot.name}** has been denied by <@${ctx.author.id}>\n\nReason: \`${ctx.options.reason}\``
 		})
 
 		return ctx.write({

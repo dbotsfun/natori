@@ -50,7 +50,7 @@ export default class UserCommand extends SubCommand {
         const logsChannel = await ctx.client.channels.fetch("1218939832391303229", true);
 
         if (logsChannel.isTextGuild()) logsChannel.messages.write({
-            content: `${req.data.approveBot.name} has been approved by <@${ctx.author.id}>`
+            content: `**${req.data.approveBot.name}** has been approved by <@${ctx.author.id}>`
         })
 
         return ctx.write({
