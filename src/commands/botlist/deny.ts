@@ -47,7 +47,10 @@ export default class UserCommand extends SubCommand {
 				(p) => p.id === Number(ctx.options.reason.split(":")[1]),
 			)
 
-			if (!preset) throw new Error("invalid preset provided")
+			if (!preset) {
+				const validPresets = denialReasonsPresets.map(x => `\`${x.id}\`: ${x.reason} ||${x.description}||`).join("\n")
+				throw new Error(`invalid preset. valid presets:\n${validPresets}`)
+			}
 
 			ctx.options.reason = `${preset.reason} | ${preset.description}`
 		}
@@ -62,6 +65,7 @@ export default class UserCommand extends SubCommand {
 			throw new Error(req.errors[0].message)
 		}
 
+		// the code above is temporal
 		const logsChannel = await ctx.client.channels.fetch("1218939832391303229", true);
 
 		if (logsChannel.isTextGuild()) logsChannel.messages.write({
