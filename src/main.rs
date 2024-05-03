@@ -3,7 +3,7 @@ mod commands;
 use poise::serenity_prelude as serenity;
 use dotenvy::dotenv;
 
-use commands::{help::*, player::player};
+use commands::{help::*};
 
 pub struct Data {} // User data, which is stored and accessible in all command invocations
 pub type Error = Box<dyn std::error::Error + Send + Sync>;
@@ -23,8 +23,7 @@ async fn main() {
                 ..Default::default()
             },
             commands: vec![
-                help(),
-                player()
+                help()
             ],
             ..Default::default()
         })
