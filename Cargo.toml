@@ -1,0 +1,18 @@
+[package]
+name = "octn"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+poise = "0.6.1"
+tokio = { version = "1.23.0", features = [ "signal", "rt-multi-thread" ] }
+dotenvy = "0.15.6"
+tracing = "0.1.37"
+tracing-subscriber = { version = "0.3.16", features = [ "env-filter" ] }
+reqwest = { version = "0.11.0", features = ["json"] }
+serde = "1.0.119"
+serde_json = "1.0.61"
+serde_derive = "1.0.119"
+exitfailure = "0.5.1"
